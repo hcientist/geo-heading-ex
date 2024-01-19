@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Geo Heading</title>
+  <link rel="icon" href="https://fav.farm/🧭">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    output {
+      font-size: 25vh;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="result"></div>
+  <script>
+    const output = document.getElementById('result')
+    function setPos(output) {
+      return ({coords:{
+        accuracy,
+        altitude,
+        altitudeAccuracy,
+        heading,
+        latitude,
+        longitude
+      }}) => {
+        // console.log(
+        output.innerText = `
+        accuracy:${accuracy}
+        altitude:${altitude}
+        altitudeAccuracy:${altitudeAccuracy}
+        heading:${heading}
+        latitude:${latitude}
+        longitude:${longitude}
+        `;
+      }
+    }
+    output.addEventListener('click', ev => {
+      navigator.geolocation.getCurrentPosition(setPos(output))
+    })
+    const watchID = navigator.geolocation.watchPosition(setPos(output));
+
+  </script>
+</body>
+
+</html>
